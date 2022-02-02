@@ -32,6 +32,13 @@
                 <button id="tv_off_btn">Turn off</button>
             </div>
         </div>
+        <div>
+            <h2>Weather</h2>
+            <div>
+                <button id="temp_btn">Temperature</button>
+                <button id="humid_btn">Humidity</button>
+            </div>
+        </div>
     </main>
 </body>
 
@@ -53,6 +60,12 @@
     })
     document.querySelector("#tv_off_btn").addEventListener('click', ev => {
         fetch("/off/tv")
+    })
+    document.querySelector("#temp_btn").addEventListener('click', ev => {
+        fetch("/weather/temp").then(res => res.text()).then(data => alert(data))
+    })
+    document.querySelector("#humid_btn").addEventListener('click', ev => {
+        fetch("/weather/humid").then(res => res.text()).then(data => alert(data))
     })
 </script>
 
