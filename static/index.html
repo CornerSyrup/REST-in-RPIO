@@ -9,7 +9,51 @@
 </head>
 
 <body>
-    hello world
+    <main>
+        <h1>Remote Home</h1>
+        <div>
+            <h2>Living Room</h2>
+            <div>
+                <button id="living_on_btn">Turn on</button>
+                <button id="living_off_btn">Turn off</button>
+            </div>
+        </div>
+        <div>
+            <h2>Kitchen</h2>
+            <div>
+                <button id="kitchen_on_btn">Turn on</button>
+                <button id="kitchen_off_btn">Turn off</button>
+            </div>
+        </div>
+        <div>
+            <h2>TV</h2>
+            <div>
+                <button id="tv_on_btn">Turn on</button>
+                <button id="tv_off_btn">Turn off</button>
+            </div>
+        </div>
+    </main>
 </body>
+
+<script>
+    document.querySelector("#living_on_btn").addEventListener('click', ev => {
+        fetch("/on/living")
+    })
+    document.querySelector("#living_off_btn").addEventListener('click', ev => {
+        fetch("/off/living")
+    })
+    document.querySelector("#kitchen_on_btn").addEventListener('click', ev => {
+        fetch("/on/kitchen")
+    })
+    document.querySelector("#kitchen_off_btn").addEventListener('click', ev => {
+        fetch("/off/kitchen")
+    })
+    document.querySelector("#tv_on_btn").addEventListener('click', ev => {
+        fetch("/on/tv")
+    })
+    document.querySelector("#tv_off_btn").addEventListener('click', ev => {
+        fetch("/off/tv")
+    })
+</script>
 
 </html>
