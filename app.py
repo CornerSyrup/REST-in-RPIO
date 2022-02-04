@@ -16,19 +16,22 @@ def index():
 
 @app.route("/on/<string:device>")
 def turn_on(device: str):
-    gpio.output(config.DEV[device], gpio.HIGH)
-    return str(gpio.input(config.DEV[device]))
+    pin = next(x.pin for x in config.devices if x.name == device and x.mode)
+    gpio.output(pin, gpio.HIGH)
+    return str(gpio.input(pin))
 
 
 @app.route("/off/<string:device>")
 def turn_off(device: str):
-    gpio.output(config.DEV[device], gpio.LOW)
-    return str(gpio.input(config.DEV[device]))
+    pin = next(x.pin for x in config.devices if x.name == device and x.mode)
+    gpio.output(pin, gpio.LOW)
+    return str(gpio.input(pin))
 
 
 @app.route("/weather/<string:reading>")
 def weather_reading(reading: str):
-    reader = dht11.DHT11(config.SENSOR["weather"])
+    dev = next(x for x in config.devices if x.name == "weather")
+    reader = dht11.DHT11(dev.pin)
     result = reader.read()
     time_st = time.time()
     while (not result.is_valid()) and time.time() - time_st < 2.5:
