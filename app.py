@@ -31,7 +31,7 @@ def weather_reading(reading: str):
     reader = dht11.DHT11(utils.SENSOR["weather"])
     result = reader.read()
     time_st = time.time()
-    while (not result.is_valid()) and time_st - time.time() < 1:
+    while (not result.is_valid()) and time.time() - time_st < 2.5:
         result = reader.read()
 
     return str(result.humidity if (reading == "humid") else result.temperature)
