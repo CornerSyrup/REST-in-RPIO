@@ -28,6 +28,10 @@ class Config:
         except json.JSONDecodeError:
             self.devices = []
 
+    def new_dev(self, name, pin):
+        self.devices.append(Device(name=name, pin=pin))
+        self.save_config()
+
 
 class Device:
     name: str
