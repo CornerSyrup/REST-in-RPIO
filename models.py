@@ -1,3 +1,34 @@
+import json
+import os
+
+
+class JsonEncoder(json.JSONEncoder):
+    def default(self, o):
+        return o.__dict__
+
+
+class Config:
+    devices: list
+    """List of registered devices"""
+
+    def __init__(self, file="config.json") -> None:
+        self.load_config(file)
+
+    def save_config(self, file="config.json") -> None:
+        src = os.getenv("RIR_CONFIG", file)
+        data = json.dumps(self, cls=JsonEncoder, indent=2)
+        print(data)
+        open(src, "w").write(data)
+
+    def load_config(self, file="config.json") -> None:
+        src = os.getenv("RIR_CONFIG", file)
+        try:
+            data = json.load(open(src, "r"))
+            self.devices = list(Device(**d) for d in data["devices"])
+        except json.JSONDecodeError:
+            self.devices = []
+
+
 class Device:
     name: str
     """Name of the device."""
