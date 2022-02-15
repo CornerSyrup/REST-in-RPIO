@@ -9,8 +9,9 @@ import utils
 app = flask.Flask(__name__)
 
 
-@app.route("/")
-def index():
+@app.route("/", defaults={"path": None})
+@app.route("/<path:path>")
+def index(path: str):
     return open("static/index.html", "r").read()
 
 

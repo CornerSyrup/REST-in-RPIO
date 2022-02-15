@@ -6,67 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
 </head>
 
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="https://unpkg.com/http-vue-loader"></script>
+
 <body>
-    <main>
-        <h1>Remote Home</h1>
-        <div>
-            <h2>Living Room</h2>
-            <div>
-                <button id="living_on_btn">Turn on</button>
-                <button id="living_off_btn">Turn off</button>
-            </div>
-        </div>
-        <div>
-            <h2>Kitchen</h2>
-            <div>
-                <button id="kitchen_on_btn">Turn on</button>
-                <button id="kitchen_off_btn">Turn off</button>
-            </div>
-        </div>
-        <div>
-            <h2>TV</h2>
-            <div>
-                <button id="tv_on_btn">Turn on</button>
-                <button id="tv_off_btn">Turn off</button>
-            </div>
-        </div>
-        <div>
-            <h2>Weather</h2>
-            <div>
-                <button id="temp_btn">Temperature</button>
-                <button id="humid_btn">Humidity</button>
-            </div>
-        </div>
-    </main>
+    <div id="app">
+        <v-app>
+            <v-navigation-drawer app>
+            </v-navigation-drawer>
+
+            <v-app-bar app>
+            </v-app-bar>
+
+            <v-main>
+                <v-container fluid>
+                    <router-view></router-view>
+                </v-container>
+            </v-main>
+
+            <v-footer app>
+            </v-footer>
+        </v-app>
+    </div>
+    <noscript>
+        This app require JavaScript. Please enable JavaScript function or try access with other browsers.
+    </noscript>
 </body>
 
-<script>
-    document.querySelector("#living_on_btn").addEventListener('click', ev => {
-        fetch("/on/living")
-    })
-    document.querySelector("#living_off_btn").addEventListener('click', ev => {
-        fetch("/off/living")
-    })
-    document.querySelector("#kitchen_on_btn").addEventListener('click', ev => {
-        fetch("/on/kitchen")
-    })
-    document.querySelector("#kitchen_off_btn").addEventListener('click', ev => {
-        fetch("/off/kitchen")
-    })
-    document.querySelector("#tv_on_btn").addEventListener('click', ev => {
-        fetch("/on/tv")
-    })
-    document.querySelector("#tv_off_btn").addEventListener('click', ev => {
-        fetch("/off/tv")
-    })
-    document.querySelector("#temp_btn").addEventListener('click', ev => {
-        fetch("/weather/temp").then(res => res.text()).then(data => alert(data))
-    })
-    document.querySelector("#humid_btn").addEventListener('click', ev => {
-        fetch("/weather/humid").then(res => res.text()).then(data => alert(data))
-    })
-</script>
+<script src="/static/js/index.js"></script>
 
 </html>
