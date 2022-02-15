@@ -6,4 +6,9 @@ new Vue({
         mode: "history",
         routes: [],
     }),
+    data: function () {
+        return {
+            drawer: false,
+        };
+    },
 }).$mount("#app");

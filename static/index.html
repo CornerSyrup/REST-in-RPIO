@@ -19,9 +19,12 @@
 <body>
     <div id="app">
         <v-app>
-            <v-navigation-drawer app permanent>
+            <v-navigation-drawer app v-model="drawer">
                 <v-list-item>
-                    <v-list-item-title class="text-center"> REST in RPIO </v-list-item-title>
+                    <v-list-item-content>
+                        <v-list-item-title class="text-h6"> REST in RPIO </v-list-item-title>
+                        <v-list-item-subtitle> You have all under control </v-list-item-subtitle>
+                    </v-list-item-content>
                 </v-list-item>
 
                 <v-divider></v-divider>
@@ -37,7 +40,9 @@
                 </v-list>
             </v-navigation-drawer>
 
-            <v-app-bar app>
+            <v-app-bar color="primary" dark app>
+                <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+                <v-toolbar-title>REST in RPIO</v-toolbar-title>
             </v-app-bar>
 
             <v-main>
