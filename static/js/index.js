@@ -18,7 +18,6 @@ new Vue({
     }),
     data: function () {
         return {
-            drawer: false,
             message: null,
         };
     },
