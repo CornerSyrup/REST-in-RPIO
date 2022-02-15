@@ -11,4 +11,4 @@ new Vue({
             drawer: false,
         };
     },
-}).$mount("#app");
+}).$mount("#vue");
