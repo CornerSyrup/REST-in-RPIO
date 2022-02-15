@@ -56,8 +56,12 @@
                 </v-container>
             </v-main>
 
-            <v-footer app>
-            </v-footer>
+            <v-snackbar multi-line :value="message" @input="ev => {if (!ev) { message = null }}">
+                {{ message }}
+                <template #action="{ attrs }">
+                    <v-btn color="primary" text v-bind="attrs" @click="message = null"> close </v-btn>
+                </template>
+            </v-snackbar>
 
             <v-btn color="primary" elevation="2" large fixed bottom right fab
                 style="z-index: 6; margin-bottom: 0; transform-origin: center center;">
