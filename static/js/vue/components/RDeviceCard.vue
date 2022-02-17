@@ -19,8 +19,8 @@
     </v-list-item>
 
     <v-card-actions>
-      <v-btn text @click="(ev) => $emit('input', true)"> Turn On </v-btn>
-      <v-btn text @click="(ev) => $emit('input', false)"> Turn Off </v-btn>
+      <v-btn text @click="(ev) => $emit('switch', true)"> Turn On </v-btn>
+      <v-btn text @click="(ev) => $emit('switch', false)"> Turn Off </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -30,6 +30,7 @@ module.exports = {
   model: {
     prop: "state",
   },
+  emits: ["switch"],
   props: {
     state: { type: Boolean, default: false },
     title: { type: String, default: "device" },

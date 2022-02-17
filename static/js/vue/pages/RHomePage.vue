@@ -6,6 +6,7 @@
           v-model="dev.state"
           :title="dev.title"
           :remark="dev.remark"
+          @switch="(ev) => (ev ? turnOnLed(dev) : turnOffLed(dev))"
         />
       </v-col>
     </v-row>
