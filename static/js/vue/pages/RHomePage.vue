@@ -9,6 +9,10 @@
         />
       </v-col>
     </v-row>
+
+    <v-btn color="primary" fixed bottom right fab style="z-index: 6">
+      <v-icon> mdi-plus </v-icon>
+    </v-btn>
   </v-container>
 </template>
 
