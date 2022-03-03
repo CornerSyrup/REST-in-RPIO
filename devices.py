@@ -16,7 +16,7 @@ def get_devices():
 @devices.route("/", methods=["POST"])
 def add_devices():
     req = request.json
-    config.new_dev(req["name"], req["pin"])
+    config.new_dev(req["name"], int(req["pin"]))
     return {}
 
 
