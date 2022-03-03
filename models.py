@@ -24,8 +24,9 @@ class Config:
         try:
             data = json.load(open(src, "r"))
             self.devices = list(Device(**d) for d in data["devices"])
-        except json.JSONDecodeError:
+        except (json.JSONDecodeError, FileNotFoundError) as err:
             self.devices = []
+            self.save_config()
 
     def new_dev(self, name, pin):
         self.devices.append(Device(name=name, pin=pin))
