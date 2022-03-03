@@ -32,6 +32,10 @@ class Config:
         self.devices.append(Device(name=name, pin=pin))
         self.save_config()
 
+    def remove_device(self, dev):
+        self.devices.remove(next(x for x in self.devices if x.name == dev))
+        self.save_config()
+
 
 class Device:
     name: str
