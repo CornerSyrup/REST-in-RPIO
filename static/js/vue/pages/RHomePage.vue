@@ -11,9 +11,7 @@
       </v-col>
     </v-row>
 
-    <v-btn color="primary" fixed bottom right fab style="z-index: 6">
-      <v-icon> mdi-plus </v-icon>
-    </v-btn>
+    <r-device-form @input="(ev) => registerNewDev(ev)" />
   </v-container>
 </template>
 
@@ -21,6 +19,10 @@
 Vue.component(
   "r-device-card",
   httpVueLoader("static/js/vue/components/RDeviceCard.vue")
+);
+Vue.component(
+  "r-device-form",
+  httpVueLoader("static/js/vue/components/RDeviceForm.vue")
 );
 
 module.exports = {
@@ -41,6 +43,20 @@ module.exports = {
     turnOffLed(device) {
       fetch(`/off/${device.title}`);
       device.state = false;
+    },
+    registerNewDev(device) {
+      console.log("");
+      if (!device.isValid()) {
+        return;
+      }
+
+      fetch(`/devices/`, { method: "post", body: JSON.stringify(device) }).then(
+        (res) => {
+          if (res.status >= 200 && res.status < 300) {
+            this.devices.push(device);
+          }
+        }
+      );
     },
   },
 };
