@@ -11,6 +11,7 @@ pins = Blueprint(__name__, __name__)
 @pins.route("/<int:pin>", methods=["POST"])
 def switch_state(pin: int):
     req = request.json
+    gpio.setup(pin, gpio.OUT)
     gpio.output(pin, gpio.HIGH if req["state"] else gpio.LOW)
     return {"state": gpio.input(pin)}
 

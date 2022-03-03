@@ -8,8 +8,6 @@ config = Config()
 def setup():
     gpio.setwarnings(False)
     gpio.setmode(gpio.BCM)
-    for dev in config.devices:
-        gpio.setup(dev.pin, gpio.OUT if dev.mode else gpio.IN)
 
 
 def teardown():
