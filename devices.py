@@ -1,6 +1,5 @@
 from time import time
 
-import RPi.GPIO as gpio
 from dht11 import DHT11
 from flask import Blueprint, request
 
@@ -31,11 +30,3 @@ def weather_reading(reading: str):
         result = reader.read()
 
     return str(result.humidity if (reading == "humid") else result.temperature)
-
-
-@devices.route("/<string:dev>", methods=["PUT"])
-def switch_device_state(dev: str):
-    req = request.json
-    pin = next(x.pin for x in config.devices if x.name == dev and x.mode)
-    gpio.output(pin, gpio.HIGH if req["state"] else gpio.LOW)
-    return {"state": gpio.input(pin)}
