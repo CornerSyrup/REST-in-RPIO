@@ -40,8 +40,11 @@ module.exports = {
         headers: {
           "Content-Type": "application/json",
         },
+      }).then((res) => {
+        if (res.status >= 200 && res.status < 300) {
+          device.state = true;
+        }
       });
-      device.state = true;
     },
     turnOffLed(device) {
       fetch(`/pins/dev/${device.name}`, {
@@ -50,8 +53,11 @@ module.exports = {
         headers: {
           "Content-Type": "application/json",
         },
+      }).then((res) => {
+        if (res.status >= 200 && res.status < 300) {
+          device.state = false;
+        }
       });
-      device.state = false;
     },
     registerNewDev(device) {
       console.log("");
