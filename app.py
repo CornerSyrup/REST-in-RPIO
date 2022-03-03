@@ -12,8 +12,9 @@ app.register_blueprint(settings, url_prefix="/settings")
 app.register_blueprint(pins, url_prefix="/pins")
 
 
-@app.route("/")
-def index():
+@app.route("/", defaults={"path": None})
+@app.route("/<path:path>")
+def index(path: str):
     return open("static/index.html", "r").read()
 
 
