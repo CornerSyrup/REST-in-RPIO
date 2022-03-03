@@ -23,14 +23,12 @@ def add_devices():
 
 @devices.route("/<string:dev>", methods=["DELETE"])
 def remove_device(dev: str):
-    config.remove_device(dev)
-    return {}
+    return {"removed": config.remove_device(dev)}
 
 
 @devices.route("/<int:dev>", methods=["DELETE"])
 def remove_by_index(dev: int):
-    config.remove_device_index(dev)
-    return {}
+    return {"removed": config.remove_device_index(dev)}
 
 
 @devices.route("/weather/<string:reading>")

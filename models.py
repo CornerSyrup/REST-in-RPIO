@@ -33,12 +33,15 @@ class Config:
         self.save_config()
 
     def remove_device(self, dev):
-        self.devices.remove(next(x for x in self.devices if x.name == dev))
+        i = self.devices.index(next(x for x in self.devices if x.name == dev))
+        d = self.devices.pop(i)
         self.save_config()
+        return d
 
     def remove_device_index(self, dev):
-        self.devices.remove(self.devices[dev - 1])
+        d = self.devices.pop(dev - 1)
         self.save_config()
+        return d
 
 
 class Device:
