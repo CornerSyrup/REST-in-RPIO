@@ -1,40 +1,20 @@
-import time
-
-import dht11
 import flask
-import RPi.GPIO as gpio
 
-import utils
+from devices import devices
+from models import JsonEncoder
+from pins import pins
+from settings import settings
 
 app = flask.Flask(__name__)
+app.json_encoder = JsonEncoder
+app.register_blueprint(devices, url_prefix="/devices")
+app.register_blueprint(settings, url_prefix="/settings")
+app.register_blueprint(pins, url_prefix="/pins")
 
 
 @app.route("/")
 def index():
     return open("static/index.html", "r").read()
-
-
-@app.route("/on/<string:device>")
-def turn_on(device: str):
-    gpio.output(utils.DEV[device], gpio.HIGH)
-    return str(gpio.input(utils.DEV[device]))
-
-
-@app.route("/off/<string:device>")
-def turn_off(device: str):
-    gpio.output(utils.DEV[device], gpio.LOW)
-    return str(gpio.input(utils.DEV[device]))
-
-
-@app.route("/weather/<string:reading>")
-def weather_reading(reading: str):
-    reader = dht11.DHT11(utils.SENSOR["weather"])
-    result = reader.read()
-    time_st = time.time()
-    while (not result.is_valid()) and time.time() - time_st < 2.5:
-        result = reader.read()
-
-    return str(result.humidity if (reading == "humid") else result.temperature)
 
 
 if __name__ == "__main__":

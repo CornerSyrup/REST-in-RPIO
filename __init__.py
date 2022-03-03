@@ -1,5 +1,5 @@
 import atexit
-import utils
+import config
 
-utils.setup()
-atexit.register(utils.teardown)
+config.setup()
+atexit.register(config.teardown)
