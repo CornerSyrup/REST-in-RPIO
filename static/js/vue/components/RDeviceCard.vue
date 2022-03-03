@@ -21,6 +21,23 @@
     <v-card-actions>
       <v-btn text @click="(ev) => $emit('switch', true)"> Turn On </v-btn>
       <v-btn text @click="(ev) => $emit('switch', false)"> Turn Off </v-btn>
+      <v-spacer></v-spacer>
+
+      <v-menu offset-y bottom>
+        <template #activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item>
+            <v-list-item-title @click="(ev) => $emit('delete', this.title)">
+              DELETE
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-card-actions>
   </v-card>
 </template>
@@ -30,7 +47,7 @@ module.exports = {
   model: {
     prop: "state",
   },
-  emits: ["switch"],
+  emits: ["switch", "delete"],
   props: {
     state: { type: Boolean, default: false },
     title: { type: String, default: "device" },
