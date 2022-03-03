@@ -33,11 +33,23 @@ module.exports = {
   },
   methods: {
     turnOnLed(device) {
-      fetch(`/on/${device.title}`);
+      fetch(`/pins/dev/${device.name}`, {
+        method: "PUT",
+        body: JSON.stringify({ state: true }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       device.state = true;
     },
     turnOffLed(device) {
-      fetch(`/off/${device.title}`);
+      fetch(`/pins/dev/${device.name}`, {
+        method: "PUT",
+        body: JSON.stringify({ state: false }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       device.state = false;
     },
     registerNewDev(device) {
@@ -46,13 +58,15 @@ module.exports = {
         return;
       }
 
-      fetch(`/devices/`, { method: "post", body: JSON.stringify(device) }).then(
-        (res) => {
-          if (res.status >= 200 && res.status < 300) {
-            this.devices.push(device);
-          }
+      fetch(`/devices/`, {
+        method: "post",
+        body: JSON.stringify(device),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => {
+        if (res.status >= 200 && res.status < 300) {
+          this.devices.push(device);
         }
-      );
+      });
     },
   },
   mounted: function () {
