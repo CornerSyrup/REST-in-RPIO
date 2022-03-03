@@ -27,6 +27,12 @@ def remove_device(dev: str):
     return {}
 
 
+@devices.route("/<int:dev>", methods=["DELETE"])
+def remove_by_index(dev: int):
+    config.remove_device_index(dev)
+    return {}
+
+
 @devices.route("/weather/<string:reading>")
 def weather_reading(reading: str):
     dev = next(x for x in config.devices if x.name == "weather")

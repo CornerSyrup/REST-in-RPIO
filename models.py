@@ -36,6 +36,10 @@ class Config:
         self.devices.remove(next(x for x in self.devices if x.name == dev))
         self.save_config()
 
+    def remove_device_index(self, dev):
+        self.devices.remove(self.devices[dev - 1])
+        self.save_config()
+
 
 class Device:
     name: str
