@@ -17,7 +17,6 @@ class Config:
     def save_config(self, file="config.json") -> None:
         src = os.getenv("RIR_CONFIG", file)
         data = json.dumps(self, cls=JsonEncoder, indent=2)
-        print(data)
         open(src, "w").write(data)
 
     def load_config(self, file="config.json") -> None:
