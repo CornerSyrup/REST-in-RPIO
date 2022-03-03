@@ -38,14 +38,10 @@ class Device:
     """Name of the device."""
     pin: int
     """Main I/O pin for the device."""
-    mode: bool
-    """IO mode for the device; True for input, False for output."""
     remarks: str
     """Any remark for the device."""
 
-    def __init__(
-        self, name: str, pin: int, mode: bool = True, remarks: str = ""
-    ) -> None:
+    def __init__(self, name: str, pin: int, remarks: str = "") -> None:
         """Instantiate a device config
 
         Args:
@@ -56,5 +52,4 @@ class Device:
         """
         self.name = name
         self.pin = pin
-        self.mode = mode
         self.remarks = remarks

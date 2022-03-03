@@ -18,5 +18,5 @@ def switch_state(pin: int):
 
 @pins.route("/dev/<string:dev>", methods=["PUT"])
 def switch_device_state(dev: str):
-    pin = next(x.pin for x in config.devices if x.name == dev and x.mode)
+    pin = next(x.pin for x in config.devices if x.name == dev)
     return switch_state(pin)
