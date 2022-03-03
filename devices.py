@@ -1,3 +1,4 @@
+from crypt import methods
 from time import time
 
 from dht11 import DHT11
@@ -18,6 +19,16 @@ def add_devices():
     req = request.json
     config.new_dev(req["name"], int(req["pin"]))
     return {}
+
+
+@devices.route("/<string:dev>", methods=["DELETE"])
+def remove_device(dev: str):
+    return {"removed": config.remove_device(dev)}
+
+
+@devices.route("/<int:dev>", methods=["DELETE"])
+def remove_by_index(dev: int):
+    return {"removed": config.remove_device_index(dev)}
 
 
 @devices.route("/weather/<string:reading>")
