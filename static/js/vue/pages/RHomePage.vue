@@ -7,6 +7,7 @@
           :title="dev.name"
           :remark="dev.remark"
           @switch="(ev) => (ev ? turnOnLed(dev) : turnOffLed(dev))"
+          @delete="(ev) => deleteDevice(ev)"
         />
       </v-col>
     </v-row>
@@ -65,6 +66,18 @@ module.exports = {
       }).then((res) => {
         if (res.status >= 200 && res.status < 300) {
           this.devices.push(device);
+        }
+      });
+    },
+    deleteDevice(ev) {
+      fetch(`/devices/${ev}`, {
+        method: "delete",
+      }).then((res) => {
+        if (res.status >= 200 && res.status < 300) {
+          this.devices.splice(
+            this.devices.findIndex((d) => d.name == ev),
+            1
+          );
         }
       });
     },
