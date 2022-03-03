@@ -4,7 +4,7 @@
       <v-col v-for="dev in devices" :key="dev.title" sm="6" md="4">
         <r-device-card
           v-model="dev.state"
-          :title="dev.title"
+          :title="dev.name"
           :remark="dev.remark"
           @switch="(ev) => (ev ? turnOnLed(dev) : turnOffLed(dev))"
         />
@@ -28,11 +28,7 @@ Vue.component(
 module.exports = {
   data: function () {
     return {
-      devices: [
-        { title: "living", state: false, remark: "" },
-        { title: "kitchen", state: false, remark: "" },
-        { title: "tv", state: false, remark: "" },
-      ],
+      devices: [],
     };
   },
   methods: {
@@ -58,6 +54,11 @@ module.exports = {
         }
       );
     },
+  },
+  mounted: function () {
+    fetch("/devices/")
+      .then((res) => res.json())
+      .then((data) => (this.devices = data.devices));
   },
 };
 </script>
