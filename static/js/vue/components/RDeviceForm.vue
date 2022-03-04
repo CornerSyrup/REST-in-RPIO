@@ -67,10 +67,10 @@ module.exports = {
     },
     cancelForm() {
       this.$emit("input", null);
+      this.closeForm();
     },
     saveForm() {
       this.$emit("input", this.value);
-
       this.closeForm();
     },
   },
