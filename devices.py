@@ -1,4 +1,3 @@
-from crypt import methods
 from time import time
 
 from dht11 import DHT11
